@@ -3,7 +3,6 @@ CleanArchitecture
 Github Api
 
 RxJava
-
 -observable 
 
 -flatmap
