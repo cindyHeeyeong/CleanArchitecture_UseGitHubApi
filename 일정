@@ -1,6 +1,7 @@
 
 리팩토링 예정인 것 
-1. ui material design에 맞게 고도화
+1. debounce 기능 삽질 중.. (잘 안돼욧)
+2. ui material design에 맞게 고도화
 
 2019/08/09 
 <리팩토링 한 것 >
@@ -9,3 +10,4 @@
   -room entity에 check 칼럼 추가 
   -data layer의 UserEntity를 json과 room을 동시에 사용할 수 있는 entity로 수정
 3. 불필요한 코드, 패키지, 클래스 
+
