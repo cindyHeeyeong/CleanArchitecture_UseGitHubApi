@@ -5,6 +5,7 @@ import io.reactivex.Observable;
 import java.util.List;
 
 //TODO 하나의 데이터만 컨트롤 하게할지, 한개의 데이터에서 데이터를 다 처리할지 구조 짜는 것 생각해보기
+//git test
 public interface UserRepository {
     //Repository는 하나의 데이터만 처리해야 한다.
     //예를 들어 userEntity에 대한 data만 들어가야 한다.
