@@ -2,6 +2,7 @@ package com.example.cleanarchitecture_toyproject.viewmodel.view.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -30,13 +31,19 @@ import com.example.cleanarchitecture_toyproject.viewmodel.presenter.UserListPres
 import com.example.cleanarchitecture_toyproject.viewmodel.view.UserClickListener;
 import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView;
 import com.example.cleanarchitecture_toyproject.viewmodel.view.adapter.UsersAdapter;
+import com.jakewharton.rxbinding2.widget.RxTextView;
+import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
+import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.BehaviorSubject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.concurrent.TimeUnit;
 
 //user를 검색하는 fragment이다
@@ -52,6 +59,7 @@ public class UserSearchFragment extends Fragment implements UserListView{
 
     //즐겨찾기 유저 삭제 presenter
     private UserListPresenter deleteUserListPresenter;
+    private Object TextWatcher;
 
     public UserSearchFragment() {
         setRetainInstance(true);
@@ -72,7 +80,6 @@ public class UserSearchFragment extends Fragment implements UserListView{
     private String[] str = {"0","1","10","100","1000"};
 
     private CompositeDisposable disposable = new CompositeDisposable();
-
 
     //onActivityCreated에서 databinding 생성하기
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -101,6 +108,14 @@ public class UserSearchFragment extends Fragment implements UserListView{
         //리사이클러뷰 셋팅
         setupRecyclerView();
 
+        disposable.add(
+                RxTextView.textChangeEvents(binding.userSearchEdt)
+                        .skipInitialValue()
+                        .debounce(500, TimeUnit.MILLISECONDS)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeWith(searchQuery()));
+
 
         binding.userSearchBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -111,16 +126,28 @@ public class UserSearchFragment extends Fragment implements UserListView{
             }
         });
 
-        debounce();
     }
+    private DisposableObserver<TextViewTextChangeEvent> searchQuery() {
+        Log.d("searchQuery", "searchQuery");
+        return new DisposableObserver<TextViewTextChangeEvent>() {
+            @Override
+            public void onNext(TextViewTextChangeEvent textViewTextChangeEvent) {
+                Log.d("search string: " , textViewTextChangeEvent.text().toString());
+                loadUserList(textViewTextChangeEvent.text().toString());
 
-    //https://www.androidhive.info/RxJava/rxjava-operators-buffer-debounce/
+            }
 
-    //https://beomseok95.tistory.com/53
-    public void debounce() {
-        
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        };
     }
-
     public void favoriteDataSync() {
         Log.d("fragementStart","start");
         loadUserList(userName);
