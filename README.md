@@ -1,8 +1,8 @@
-1.CleanArchitecture
+1. CleanArchitecture
 
-2.Github Api
+2. Github Api
 
-3.RxJava
+3. RxJava
 
 -observable 
 
@@ -12,11 +12,11 @@
 
 -eventbus
 
-4.Retrofit
+4. Retrofit
 
-5.Room
+5. Room
 
-7.RecyclerView
+7. RecyclerView
 
-8.ConstraintLayout
+8. ConstraintLayout
 
