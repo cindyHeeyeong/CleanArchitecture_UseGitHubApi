@@ -10,7 +10,7 @@
 
 -map
 
--eventbus
+-eventbus(BehaviorSubject)
 
 4. Retrofit
 
