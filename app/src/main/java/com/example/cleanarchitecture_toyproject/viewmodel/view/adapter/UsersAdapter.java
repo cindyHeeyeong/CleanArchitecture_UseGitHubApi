@@ -21,6 +21,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     private List<UserModel> usersList;
     private UserClickListener listener = null;
 
+
+    //TODO
+    private UserModel userModel1;
+
     @NonNull
     @Override
     public UserViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,6 +48,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     @Override
     public void onBindViewHolder(@NonNull UserViewHolder holder, int position) {
         UserModel userModel = usersList.get(position);
+        //UserModel userModel = new UserModel(userModel1.getId(), userModel1.getLogin(), userModel1.getAvatar_url(), userModel1.getChecked());
         if(userModel.getChecked() != null) {
             holder.checkBox.setChecked(userModel.getChecked());
         }
@@ -86,4 +91,5 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UserViewHold
     public void setOnItemClickListener(UserClickListener listener){
         this.listener = listener;
     }
+
 }

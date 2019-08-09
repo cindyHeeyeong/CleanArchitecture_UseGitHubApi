@@ -2,6 +2,8 @@ package com.example.cleanarchitecture_toyproject.viewmodel.view.Fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +23,21 @@ import com.example.cleanarchitecture_toyproject.domain.usecase.DeleteUserListUse
 import com.example.cleanarchitecture_toyproject.domain.usecase.GetUserListUseCase;
 import com.example.cleanarchitecture_toyproject.domain.usecase.SetUserListUseCase;
 import com.example.cleanarchitecture_toyproject.provider.DatabaseProvider;
+import com.example.cleanarchitecture_toyproject.viewmodel.RxBus.RxEventBus;
 import com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper;
 import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel;
 import com.example.cleanarchitecture_toyproject.viewmodel.presenter.UserListPresenter;
 import com.example.cleanarchitecture_toyproject.viewmodel.view.UserClickListener;
 import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView;
 import com.example.cleanarchitecture_toyproject.viewmodel.view.adapter.UsersAdapter;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.concurrent.TimeUnit;
 
 //user를 검색하는 fragment이다
 public class UserSearchFragment extends Fragment implements UserListView{
@@ -60,6 +69,11 @@ public class UserSearchFragment extends Fragment implements UserListView{
     //provider
     public DatabaseProvider databaseProvider;
 
+    private String[] str = {"0","1","10","100","1000"};
+
+    private CompositeDisposable disposable = new CompositeDisposable();
+
+
     //onActivityCreated에서 databinding 생성하기
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //fragment setting
@@ -67,7 +81,9 @@ public class UserSearchFragment extends Fragment implements UserListView{
 
         Log.d("onCreateView","onCreateView");
         return binding.getRoot();
+
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -85,6 +101,7 @@ public class UserSearchFragment extends Fragment implements UserListView{
         //리사이클러뷰 셋팅
         setupRecyclerView();
 
+
         binding.userSearchBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +110,15 @@ public class UserSearchFragment extends Fragment implements UserListView{
                 loadUserList(userName);
             }
         });
+
+        debounce();
+    }
+
+    //https://www.androidhive.info/RxJava/rxjava-operators-buffer-debounce/
+
+    //https://beomseok95.tistory.com/53
+    public void debounce() {
+        
     }
 
     public void favoriteDataSync() {
@@ -122,6 +148,7 @@ public class UserSearchFragment extends Fragment implements UserListView{
                 if(userModel.getChecked()) {
                     Log.d("getChecked", "true");
                     setUserListPresenter.insertUserList(userModel);
+                    RxEventBus.getInstance().sendBus(userModel);
                 } else {
                     Log.d("getChecked", "false");
                     deleteUserListPresenter.deleteUser(userModel);

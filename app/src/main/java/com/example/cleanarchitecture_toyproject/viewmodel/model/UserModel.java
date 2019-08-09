@@ -1,7 +1,6 @@
 package com.example.cleanarchitecture_toyproject.viewmodel.model;
 
 import android.util.Log;
-import com.example.cleanarchitecture_toyproject.data.entity.UserEntity;
 
 public class UserModel {
 
@@ -11,7 +10,7 @@ public class UserModel {
 
     private String avatar_url;
 
-    private Boolean isChecked = false;
+    private Boolean isChecked;
 
     //checkbox setting
     public Boolean getChecked() {

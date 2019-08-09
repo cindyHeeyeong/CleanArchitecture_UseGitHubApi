@@ -20,6 +20,7 @@ import com.example.cleanarchitecture_toyproject.databinding.FragmentFavoriteUser
 import com.example.cleanarchitecture_toyproject.domain.executor.UIThread;
 import com.example.cleanarchitecture_toyproject.domain.usecase.DeleteUserListUseCase;
 import com.example.cleanarchitecture_toyproject.domain.usecase.SelectUserListUseCase;
+import com.example.cleanarchitecture_toyproject.viewmodel.RxBus.RxEventBus;
 import com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper;
 import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel;
 import com.example.cleanarchitecture_toyproject.viewmodel.presenter.FavoriteUserPresenter;
@@ -41,7 +42,10 @@ public class UserFavoriteFragment extends Fragment implements UserListView {
     private ArrayList<UserModel> usersList = new ArrayList<>();
 
     private UsersAdapter usersAdapter;
-    //onCreateView에서는 한번 이상 실행될 수 있다.
+
+    private ArrayList<UserModel> userModels = new ArrayList<>();
+    //onCreateView에서는
+    // 한번 이상 실행될 수 있다.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
@@ -59,23 +63,41 @@ public class UserFavoriteFragment extends Fragment implements UserListView {
         deleteUserPresenter = new FavoriteUserPresenter(new DeleteUserListUseCase(UserRepositoryImpl.getInstance(), new JobExecutor(), new UIThread()), new UserModelMapper());
 
         favoriteUserPresenter.setView(this);
-        favoriteUserPresenter.SelectFavoriteUser();
+
+        //TODO
+
+        RxEventBus.getInstance().getBus().map(object -> (UserModel)object)
+                .subscribe(userModel -> {
+                   if(userModel instanceof UserModel) {
+
+                       Log.d("rxeventbus2222", String.valueOf(userModel.getAvatar_url()));
+
+                       userModels.add(userModel);
+
+                       setupRecyclerView();
+                   }
+                });
+
+        //favoriteUserPresenter.SelectFavoriteUser();
 
         //리사이클러뷰 셋팅
-        setupRecyclerView();
+        //setupRecyclerView();
     }
 
+
     private void setupRecyclerView() {
+        Log.d("userModels",String.valueOf(userModels));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), new LinearLayoutManager(requireActivity()).getOrientation());
         //recyclerview setting
         RecyclerView recyclerView = binding.rvUsers;
         recyclerView.addItemDecoration(dividerItemDecoration);
         recyclerView.setHasFixedSize(true);
-        usersAdapter = new UsersAdapter(usersList);
+        //usersAdapter = new UsersAdapter(usersList);
+        usersAdapter = new UsersAdapter(userModels);
         usersAdapter.setOnItemClickListener(new UserClickListener() {
             @Override
             public void setOnClick(UserModel userModel) {
-                Log.v("DEBUG900", "userModel :" + userModel);
+                Log.v("DEBUG999", "userModel :" + userModel);
                 usersAdapter.notifyDataSetChanged();
 
                 //delete user data
@@ -83,14 +105,13 @@ public class UserFavoriteFragment extends Fragment implements UserListView {
             }
         });
         recyclerView.setAdapter(usersAdapter);
-
     }
 
     @Override
     public void renderUserlist(List<UserModel> userModelCollection) {
         if (userModelCollection != null) {
-            this.usersAdapter.setUserCollection(userModelCollection);
-        }
+            usersAdapter.setUserCollection(userModelCollection);
+    }
         usersAdapter.notifyDataSetChanged();
     }
 

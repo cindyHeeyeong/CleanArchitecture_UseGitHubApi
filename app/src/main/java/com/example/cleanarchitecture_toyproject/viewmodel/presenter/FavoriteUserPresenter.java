@@ -68,7 +68,6 @@ public class FavoriteUserPresenter{
 
     //mapping
     public void showUserCollectionInView(List<User> userCollection) {
-
         List<UserModel> userModelCollection = userModelMapper.transform(userCollection);
         this.viewListView.renderUserlist(userModelCollection);
 
