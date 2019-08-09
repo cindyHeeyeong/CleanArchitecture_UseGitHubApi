@@ -6,6 +6,8 @@
 
 -observable 
 
+-completable
+
 -flatmap
 
 -map
