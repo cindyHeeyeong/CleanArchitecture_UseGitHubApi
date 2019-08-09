@@ -14,6 +14,8 @@
 
 -eventbus(BehaviorSubject)
 
+-disposable debounce
+
 4. Retrofit
 
 5. Room
