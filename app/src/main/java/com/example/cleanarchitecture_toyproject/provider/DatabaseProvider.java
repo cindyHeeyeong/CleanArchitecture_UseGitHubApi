@@ -6,6 +6,8 @@ import androidx.room.Room;
 import com.example.cleanarchitecture_toyproject.data.cache.database.AppDatabase;
 import com.example.cleanarchitecture_toyproject.viewmodel.AndroidApplication;
 
+
+//Room builder
 public class DatabaseProvider {
     private static DatabaseProvider instance;
     private Context context;

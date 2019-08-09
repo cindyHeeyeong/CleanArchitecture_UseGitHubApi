@@ -1,37 +1,35 @@
 package com.example.cleanarchitecture_toyproject.domain.usecase;
 
-        import com.example.cleanarchitecture_toyproject.data.entity.UserEntity;
-        import com.example.cleanarchitecture_toyproject.domain.User;
-        import com.example.cleanarchitecture_toyproject.domain.executor.PostExecutionThread;
-        import com.example.cleanarchitecture_toyproject.domain.executor.ThreadExecutor;
-        import com.example.cleanarchitecture_toyproject.domain.repository.UserRepository;
-        import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel;
-        import io.reactivex.Completable;
+import com.example.cleanarchitecture_toyproject.domain.User;
+import com.example.cleanarchitecture_toyproject.domain.executor.PostExecutionThread;
+import com.example.cleanarchitecture_toyproject.domain.executor.ThreadExecutor;
+import com.example.cleanarchitecture_toyproject.domain.repository.UserRepository;
+import io.reactivex.Completable;
 
-public class DeleteUserListUseCase extends CompletableUseCase<DeleteUserListUseCase.Request>{
+public class DeleteUserListUseCase extends CompletableUseCase<DeleteUserListUseCase.Params> {
 
     private final UserRepository userRepository;
 
-    public DeleteUserListUseCase(UserRepository userRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread){
-        super(threadExecutor,postExecutionThread);
+    public DeleteUserListUseCase(UserRepository userRepository, ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+        super(threadExecutor, postExecutionThread);
         this.userRepository = userRepository;
     }
 
     @Override
-    protected Completable buildUseCase(Request request) {
-        return Completable.fromAction(() -> userRepository.deleteUsers(request.getUser()));
+    protected Completable buildUseCase(Params params) {
+        return Completable.fromAction(() -> userRepository.deleteUsers(params.getUser()));
     }
 
-    public static final class Request {
+    public static final class Params {
 
-        private final User userModel;
+        private final User user;
 
-        public Request(User userModel) {
-            this.userModel = userModel;
+        public Params(User user) {
+            this.user = user;
         }
 
         public User getUser() {
-            return userModel;
+            return user;
         }
     }
 }

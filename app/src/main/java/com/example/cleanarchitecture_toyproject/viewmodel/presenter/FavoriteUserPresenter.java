@@ -60,9 +60,9 @@ public class FavoriteUserPresenter{
     //userModel 정보 삭제
     public void deleteUserData(UserModel userModel) {
 
-        DeleteUserListUseCase.Request request = new DeleteUserListUseCase.Request(userModelMapper.transform(userModel));
+        DeleteUserListUseCase.Params params = new DeleteUserListUseCase.Params(userModelMapper.transform(userModel));
 
-        this.deleteUserListUseCase.subscribe(request);
+        this.deleteUserListUseCase.subscribe(params);
     }
 
 

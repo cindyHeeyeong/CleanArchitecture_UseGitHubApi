@@ -6,6 +6,7 @@ import io.reactivex.Observable;
 import java.util.List;
 
 interface UserRemoteSource {
+
     Observable<List<UserEntity>> getUsers(String userName);
 
 }

@@ -25,6 +25,7 @@ public class SetUserListUseCase extends CompletableUseCase<SetUserListUseCase.Re
         return Completable.fromAction(() -> userRepository.setUsers(request.getTask()));
     }
 
+    //param으로 바꾸기
     public static final class Request {
 
         private final User userModel;

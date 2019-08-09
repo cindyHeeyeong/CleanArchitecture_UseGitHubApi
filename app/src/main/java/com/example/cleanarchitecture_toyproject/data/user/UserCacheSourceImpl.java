@@ -4,7 +4,6 @@ import android.util.Log;
 import com.example.cleanarchitecture_toyproject.data.cache.database.AppDatabase;
 import com.example.cleanarchitecture_toyproject.data.entity.UserEntity;
 import com.example.cleanarchitecture_toyproject.provider.DatabaseProvider;
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel;
 import io.reactivex.Observable;
 
 import java.util.List;
@@ -47,6 +46,7 @@ public class UserCacheSourceImpl implements UserCacheSource {
     //remote에 있는 getuser불러오기
     @Override
     public void setUsers(UserEntity userEntity) {
+        Log.d("userCachesource123", String.valueOf(userEntity.getchecked()));
         database.userDao().insert(userEntity);
     }
 }

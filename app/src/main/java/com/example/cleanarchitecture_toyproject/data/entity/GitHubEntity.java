@@ -1,8 +1,6 @@
 package com.example.cleanarchitecture_toyproject.data.entity;
 
-import android.util.Log;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.ArrayList;
 import java.util.List;
 

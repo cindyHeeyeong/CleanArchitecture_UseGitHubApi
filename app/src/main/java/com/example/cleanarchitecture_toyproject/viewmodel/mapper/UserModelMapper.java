@@ -17,6 +17,7 @@ public class UserModelMapper {
         if (user == null) {
             throw new IllegalArgumentException("cannot transform a null value");
         }
+
         UserModel userModel = new UserModel(user.getId(), user.getLogin(), user.getAvatar_url(), user.getChecked());
 
         userModel.setLogin(user.getLogin());
@@ -42,6 +43,7 @@ public class UserModelMapper {
     }
 
     public User transform(UserModel userModel) {
+        Log.d("User Transform", String.valueOf(userModel.getAvatar_url()));
         return new User(userModel.getId(), userModel.getLogin(), userModel.getAvatar_url(), userModel.getChecked());
     }
 }

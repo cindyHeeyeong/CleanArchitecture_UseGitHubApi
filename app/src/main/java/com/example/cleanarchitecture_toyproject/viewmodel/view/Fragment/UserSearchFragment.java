@@ -109,10 +109,9 @@ public class UserSearchFragment extends Fragment implements UserListView{
     //리사이클러 뷰 셋팅
     public void setupRecyclerView() {
         Log.d("setupRecyclerView","start");
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(getActivity(), new LinearLayoutManager(getActivity()).getOrientation());
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireActivity(), new LinearLayoutManager(requireActivity()).getOrientation());
         recyclerView = binding.rvUsers;
         recyclerView.addItemDecoration(dividerItemDecoration);
-        //getActivity 다음에 나오는 3이 뭐지?
         recyclerView.setHasFixedSize(true);
         usersAdapter = new UsersAdapter(usersList);
         usersAdapter.setOnItemClickListener(new UserClickListener() {

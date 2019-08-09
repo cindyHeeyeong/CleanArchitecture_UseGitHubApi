@@ -1,16 +1,13 @@
 package com.example.cleanarchitecture_toyproject.data.repository;
 
 import android.util.Log;
-import com.example.cleanarchitecture_toyproject.data.entity.UserEntity;
 import com.example.cleanarchitecture_toyproject.data.mapper.UserEntityMapper;
 import com.example.cleanarchitecture_toyproject.data.mapper.UserModelMapper;
 import com.example.cleanarchitecture_toyproject.data.user.UserDataSource;
 import com.example.cleanarchitecture_toyproject.data.user.UserDatasourceImpl;
 import com.example.cleanarchitecture_toyproject.domain.repository.UserRepository;
 import com.example.cleanarchitecture_toyproject.domain.User;
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel;
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
 import java.util.List;
 
 //해당 기능에 관련된 repository / repository는 하나의 데이터만 컨트롤 하게/ 분리되는건 다 분리시키기
@@ -51,7 +48,6 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     //db에서 favorite user정보를 가져온다.
-
     /***
      *
      *  return userDataSource.selectUsers().map(new Function<List<UserEntity>, List<User>>() {
@@ -71,7 +67,7 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     //usermodel-> userentity
     public void setUsers(User user) {
-       // Log.d("UserRepositoryImpl", String.valueOf(userModel));
+        Log.d("debug123", String.valueOf(user.getChecked()));
         userDataSource.setUsers(userEntityMapper.transform(user));
     }
 

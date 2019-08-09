@@ -66,19 +66,19 @@ public class UserListPresenter{
 
     //db에 유저 정보 저장
     public void insertUserList(UserModel userModel){
-
-        userModel = UserModel.createNewTask(userModel.getId(), userModel.getLogin(), userModel.getAvatar_url(),userModel.getChecked());
+        userModel = new UserModel(userModel.getId(), userModel.getLogin(), userModel.getAvatar_url(),userModel.getChecked());
         SetUserListUseCase.Request request = new SetUserListUseCase.Request(userModelMapper.transform(userModel));
 
         this.setUserListUserCaseUseCase.subscribe(request);
     }
 
     public void deleteUser(UserModel userModel) {
-        
-        userModel = UserModel.createNewTask(userModel.getId(), userModel.getLogin(), userModel.getAvatar_url(), userModel.getChecked());
-        DeleteUserListUseCase.Request request = new DeleteUserListUseCase.Request(userModelMapper.transform(userModel));
 
-        this.deleteUserListUseCase.subscribe(request);
+
+        userModel = new UserModel(userModel.getId(), userModel.getLogin(), userModel.getAvatar_url(),userModel.getChecked());
+        DeleteUserListUseCase.Params params = new DeleteUserListUseCase.Params(userModelMapper.transform(userModel));
+
+        this.deleteUserListUseCase.subscribe(params);
     }
 
 

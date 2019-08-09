@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface RestApi {
 
-    //https://api.github.com/search/users?q=cindy
-    //String API_BASE_URL = "https://api.github.com/search/users"; //TODO q=username도 추가
+    //curl https://api.github.com/search/users?q=cindy
+    //String API_BASE_URL = "https://api.github.com/search/users";
 
     String API_BASE_URL = "https://api.github.com/";
 

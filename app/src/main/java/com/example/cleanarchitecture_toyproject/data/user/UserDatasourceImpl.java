@@ -2,7 +2,6 @@ package com.example.cleanarchitecture_toyproject.data.user;
 
 import android.util.Log;
 import com.example.cleanarchitecture_toyproject.data.entity.UserEntity;
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
@@ -65,6 +64,7 @@ public class UserDatasourceImpl implements UserDataSource {
 
     @Override
     public void setUsers(UserEntity userEntity) {
+        Log.d("usercachesource2", String.valueOf(userEntity.getchecked()));
         userCacheSource.setUsers(userEntity);
     }
 

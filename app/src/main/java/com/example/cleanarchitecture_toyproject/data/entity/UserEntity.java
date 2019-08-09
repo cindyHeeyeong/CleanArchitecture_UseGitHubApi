@@ -102,7 +102,11 @@ public class UserEntity {
     @Ignore
     private float score;
 
-    @Ignore
+    public Boolean getChecked() {
+        return checked;
+    }
+
+    @ColumnInfo(name = "checked")
     private Boolean checked;
 
 

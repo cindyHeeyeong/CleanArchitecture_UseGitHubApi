@@ -66,7 +66,7 @@ public class UserFavoriteFragment extends Fragment implements UserListView {
     }
 
     private void setupRecyclerView() {
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), new LinearLayoutManager(getActivity()).getOrientation());
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(requireContext(), new LinearLayoutManager(requireActivity()).getOrientation());
         //recyclerview setting
         RecyclerView recyclerView = binding.rvUsers;
         recyclerView.addItemDecoration(dividerItemDecoration);

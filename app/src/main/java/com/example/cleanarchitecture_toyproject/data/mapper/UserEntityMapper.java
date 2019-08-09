@@ -32,6 +32,7 @@ public class UserEntityMapper {
     }
 
     public UserEntity transform(User target) {
+        Log.d("debug124", String.valueOf(target.getChecked()));
         return new UserEntity(target.getId(),target.getLogin(),target.getAvatar_url(), target.getChecked());
     }
 
