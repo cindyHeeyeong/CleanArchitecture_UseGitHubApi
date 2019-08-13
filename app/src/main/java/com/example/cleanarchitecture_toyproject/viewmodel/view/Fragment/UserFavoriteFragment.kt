@@ -98,17 +98,19 @@ class UserFavoriteFragment : Fragment(), UserListView {
         recyclerView.setHasFixedSize(true)
         //usersAdapter = new UsersAdapter(usersList);
         usersAdapter = UsersAdapter(userModels)
-        usersAdapter!!.setOnItemClickListener(UserClickListener { userModel ->
-            Log.v("DEBUG999", "userModel :$userModel")
-            usersAdapter!!.notifyDataSetChanged()
+        usersAdapter!!.setOnItemClickListener(object : UserClickListener {
+            override fun setOnClick(userModel: UserModel) {
+                Log.v("DEBUG999", "userModel :$userModel")
+                usersAdapter!!.notifyDataSetChanged()
 
-            //delete user data
-            deleteUserPresenter!!.deleteUserData(userModel)
+                //delete user data
+                deleteUserPresenter!!.deleteUserData(userModel)
+            }
         })
         recyclerView.adapter = usersAdapter
     }
 
-    override fun renderUserlist(userModelCollection: List<UserModel>?) {
+    override fun renderUserlist(userModelCollection: List<UserModel>) {
         if (userModelCollection != null) {
             usersAdapter!!.setUserCollection(userModelCollection)
         }

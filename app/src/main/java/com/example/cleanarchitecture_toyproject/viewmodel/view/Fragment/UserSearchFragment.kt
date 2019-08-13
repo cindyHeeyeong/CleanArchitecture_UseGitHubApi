@@ -179,16 +179,18 @@ class UserSearchFragment : Fragment(), UserListView {
         recyclerView!!.addItemDecoration(dividerItemDecoration)
         recyclerView!!.setHasFixedSize(true)
         usersAdapter = UsersAdapter(usersList)
-        usersAdapter!!.setOnItemClickListener(UserClickListener { userModel ->
-            Log.v("DEBUG900", "userModel :$userModel")
-            usersAdapter!!.notifyDataSetChanged()
-            if (userModel.checked!!) {
-                Log.d("getChecked", "true")
-                setUserListPresenter!!.insertUserList(userModel)
-                RxEventBus.instance!!.sendBus(userModel)
-            } else {
-                Log.d("getChecked", "false")
-                deleteUserListPresenter!!.deleteUser(userModel)
+        usersAdapter!!.setOnItemClickListener(object : UserClickListener {
+            override fun setOnClick(userModel: UserModel) {
+                Log.v("DEBUG900", "userModel :$userModel")
+                usersAdapter!!.notifyDataSetChanged()
+                if (userModel.checked!!) {
+                    Log.d("getChecked", "true")
+                    setUserListPresenter!!.insertUserList(userModel)
+                    RxEventBus.instance!!.sendBus(userModel)
+                } else {
+                    Log.d("getChecked", "false")
+                    deleteUserListPresenter!!.deleteUser(userModel)
+                }
             }
         })
         recyclerView!!.adapter = usersAdapter
