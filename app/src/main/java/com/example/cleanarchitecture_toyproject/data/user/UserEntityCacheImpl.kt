@@ -23,7 +23,7 @@ class UserEntityCacheImpl(private val database: AppDatabase) : UserEntityCache {
 
     //remote에 있는 getuser불러오기
     override fun setUsers(userEntity: UserEntity) {
-        Log.d("userCachesource123", userEntity.getchecked().toString())
+        Log.d("userCachesource123", userEntity.checked.toString())
         database.userDao().insert(userEntity)
     }
 }

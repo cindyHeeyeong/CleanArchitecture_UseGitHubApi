@@ -15,7 +15,7 @@ class UserCacheDataSourceImpl (
     }
 
     override fun setUsers(userEntity: UserEntity) {
-        Log.d("usercachesource2", userEntity.getchecked().toString())
+        Log.d("usercachesource2", userEntity.checked.toString())
         userEntityCache.setUsers(userEntity)
     }
 

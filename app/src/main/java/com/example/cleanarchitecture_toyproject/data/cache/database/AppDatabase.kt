@@ -12,13 +12,4 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
 
-    companion object {
-        fun makeDataBase(context: Context): AppDatabase {
-            Log.d("databaseprovider", context.toString())
-            return Room.databaseBuilder(context, AppDatabase::class.java, "UserModel_database")
-                .fallbackToDestructiveMigration()
-                .build()
-        }
-    }
-
 }

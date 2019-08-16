@@ -13,7 +13,7 @@ class UserRemoteRepositoryImpl(
 
     override fun getUsers(userName: String): Observable<List<User>> {
         Log.d("UserRepositoryImpl", "getUsers")
-        return userRemoteDataSource.getUsers(userName).map {userEntityCollections-> userEntityMapper.transform(userEntityCollections)}
+        return userRemoteDataSource.getUsers(userName).map(userEntityMapper::transform)
     }
 
 }

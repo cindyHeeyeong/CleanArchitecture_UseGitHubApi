@@ -1,5 +1,6 @@
 package com.example.cleanarchitecture_toyproject.di
 
+import androidx.room.Room
 import com.example.cleanarchitecture_toyproject.data.cache.database.AppDatabase
 import com.example.cleanarchitecture_toyproject.data.constant.ApiConstants
 import com.example.cleanarchitecture_toyproject.data.executor.JobExecutor
@@ -17,16 +18,27 @@ import com.example.cleanarchitecture_toyproject.domain.usecase.DeleteUserListUse
 import com.example.cleanarchitecture_toyproject.domain.usecase.GetUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SelectUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SetUserListUseCase
-import com.example.cleanarchitecture_toyproject.viewmodel.presenter.FavoriteUserPresenter
-import com.example.cleanarchitecture_toyproject.viewmodel.presenter.UserListPresenter
+import com.example.cleanarchitecture_toyproject.presentation.mapper.UserModelMapper
+import com.example.cleanarchitecture_toyproject.presentation.presenter.FavoriteUserPresenter
+import com.example.cleanarchitecture_toyproject.presentation.presenter.UserListPresenter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
+
+val roomModule = module {
+    single{
+        Room.databaseBuilder(androidContext(), AppDatabase::class.java, "UserModel_database.db")
+            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+}
 
 //파란색 글씨 : 빌더 패턴 (get()할 때 굳이 적어주지 않아도 됨
 val remoteApiModule = module {
@@ -40,7 +52,6 @@ val remoteSourceModule = module {
 
 val cacheSourceModule = module {
     //TODO appdatabase module 만들어야 함
-    single {AppDatabase.makeDataBase(androidApplication())}
     single {get<AppDatabase>().userDao()}
     single<UserEntityCache> {UserEntityCacheImpl(database = get())}
 }
@@ -51,9 +62,8 @@ val dataSourceModule = module {
 }
 
 val mapperModule = module {
+    factory { UserModelMapper() } //두개가 각각 다른 레이어의 mapper이다
     factory { UserEntityMapper() }
-    factory { com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper() } //두개가 각각 다른 레이어의 mapper이다
-    factory { com.example.cleanarchitecture_toyproject.data.mapper.UserModelMapper() }
 }
 
 val presenterModule = module {
@@ -79,6 +89,7 @@ val usecaseModule = module {
 }
 
 val myModule = listOf(
+    roomModule,
     remoteApiModule,
     cacheSourceModule,
     remoteSourceModule,

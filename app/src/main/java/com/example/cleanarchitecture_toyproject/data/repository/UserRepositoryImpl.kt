@@ -2,7 +2,6 @@ package com.example.cleanarchitecture_toyproject.data.repository
 
 import android.util.Log
 import com.example.cleanarchitecture_toyproject.data.mapper.UserEntityMapper
-import com.example.cleanarchitecture_toyproject.data.mapper.UserModelMapper
 import com.example.cleanarchitecture_toyproject.data.user.UserCacheDataSource
 import com.example.cleanarchitecture_toyproject.domain.repository.UserRepository
 import com.example.cleanarchitecture_toyproject.domain.User
@@ -17,7 +16,7 @@ import io.reactivex.Observable
 class UserRepositoryImpl(
     private val userCacheDataSource: UserCacheDataSource,
     private val userEntityMapper: UserEntityMapper,
-    private val userModelMapper: UserModelMapper
+    private val userModelMapper: UserEntityMapper
 ) : UserRepository {
 
     //datasource로 부터 의존성 주입 받기
