@@ -10,12 +10,4 @@ interface RestApi {
 
     //user login name 불러오기
     fun getUsers(userName: String): Observable<List<UserEntity>>
-
-    companion object {
-
-        //curl https://api.github.com/search/users?q=cindy
-        //String API_BASE_URL = "https://api.github.com/search/users";
-
-        val API_BASE_URL = "https://api.github.com/"
-    }
 }

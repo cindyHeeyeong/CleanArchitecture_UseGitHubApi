@@ -10,30 +10,12 @@ import com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper
 import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
 import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView
 
-class UserListPresenter {
+class UserListPresenter(val getUserListUseCase: GetUserListUseCase,
+                        val setUserListUserCaseUseCase: SetUserListUseCase,
+                        val deleteUserListUseCase: DeleteUserListUseCase,
+                        val userModelMapper: UserModelMapper) {
 
     private var viewListView: UserListView? = null
-
-    private lateinit var getUserListUseCase: GetUserListUseCase
-    private lateinit var setUserListUserCaseUseCase: SetUserListUseCase
-    private lateinit var deleteUserListUseCase: DeleteUserListUseCase
-
-    private var userModelMapper: UserModelMapper? = null
-
-    constructor(getUserListUseCase: GetUserListUseCase, userModelMapper: UserModelMapper) {
-        this.getUserListUseCase = getUserListUseCase
-        this.userModelMapper = userModelMapper
-    }
-
-    constructor(setUserListUserCaseUseCase: SetUserListUseCase, userModelMapper: UserModelMapper) {
-        this.setUserListUserCaseUseCase = setUserListUserCaseUseCase
-        this.userModelMapper = userModelMapper
-    }
-
-    constructor(deleteUserListUseCase: DeleteUserListUseCase, userModelMapper: UserModelMapper) {
-        this.deleteUserListUseCase = deleteUserListUseCase
-        this.userModelMapper = userModelMapper
-    }
 
     fun setView(view: UserListView) {
         this.viewListView = view
@@ -70,7 +52,6 @@ class UserListPresenter {
 
     fun deleteUser(userModel: UserModel) {
         var userModel = userModel
-
 
         userModel = UserModel(userModel.id, userModel.login, userModel.avatar_url, userModel.checked)
         val params = DeleteUserListUseCase.Params(userModelMapper!!.transform(userModel))

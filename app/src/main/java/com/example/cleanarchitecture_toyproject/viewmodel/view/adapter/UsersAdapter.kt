@@ -18,8 +18,6 @@ class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersA
     private var usersList: List<UserModel>? = null
     private var listener: UserClickListener? = null
 
-
-    //TODO
     private val userModel1: UserModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {

@@ -54,7 +54,18 @@ class MainActivity : BaseActivity() {
             }
             false
         }
+
+      // test()
     }
 
+    //inline 함수 스터디
+/*    inline fun print(body:()->Unit){
+        body()
+    }
+
+    fun test(){
+        print{ Log.v("DEBUG100","test") }
+
+    }*/
 
 }

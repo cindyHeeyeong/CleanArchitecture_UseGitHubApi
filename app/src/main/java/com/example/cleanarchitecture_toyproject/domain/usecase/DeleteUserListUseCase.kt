@@ -13,7 +13,7 @@ class DeleteUserListUseCase(
 ) : CompletableUseCase<DeleteUserListUseCase.Params>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCase(params: Params): Completable {
-        return Completable.fromAction { userRepository.deleteUsers(params.user) }
+        return Completable.fromAction { userRepository?.deleteUsers(params.user) }
     }
 
     class Params(val user: User)

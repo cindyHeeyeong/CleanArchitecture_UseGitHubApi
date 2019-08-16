@@ -10,9 +10,6 @@ interface UserRepository {
     //예를 들어 userEntity에 대한 data만 들어가야 한다.
     //token을 꺼내오는 data가 들어가면 안된다.
 
-    //Observable<List<User>> getUsers();
-    fun getUsers(userName: String): Observable<List<User>>
-
     //room에서 select한 데이터 가져오기
     fun selectUsers(): Observable<List<User>>
 

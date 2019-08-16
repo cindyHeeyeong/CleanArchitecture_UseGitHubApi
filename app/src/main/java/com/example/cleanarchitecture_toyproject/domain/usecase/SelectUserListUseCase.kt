@@ -14,6 +14,6 @@ class SelectUserListUseCase(
 ) : UseCase<List<User>, Void>(threadExecutor, postExecutionThread) {
 
     override fun buildUseCaseObservable(aVoid: Void?): Observable<List<User>> {
-        return this.userRepository.selectUsers()
+        return this.userRepository!!.selectUsers()
     }
 }

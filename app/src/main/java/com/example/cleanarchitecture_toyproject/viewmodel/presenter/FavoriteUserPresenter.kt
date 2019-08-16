@@ -9,25 +9,9 @@ import com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper
 import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
 import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView
 
-class FavoriteUserPresenter {
+class FavoriteUserPresenter(val selectUserListUsecase: SelectUserListUseCase, val deleteUserListUseCase: DeleteUserListUseCase,val userModelMapper: UserModelMapper) {
 
     private var viewListView: UserListView? = null
-
-    private lateinit var selectUserListUsecase: SelectUserListUseCase
-
-    private lateinit var deleteUserListUseCase: DeleteUserListUseCase
-
-    private var userModelMapper: UserModelMapper? = null
-
-    constructor(selectUserListUseCase: SelectUserListUseCase, userModelMapper: UserModelMapper) {
-        this.selectUserListUsecase = selectUserListUseCase
-        this.userModelMapper = userModelMapper
-    }
-
-    constructor(deleteUserListUseCase: DeleteUserListUseCase, userModelMapper: UserModelMapper) {
-        this.deleteUserListUseCase = deleteUserListUseCase
-        this.userModelMapper = userModelMapper
-    }
 
     fun setView(view: UserListView) {
         this.viewListView = view
@@ -55,9 +39,7 @@ class FavoriteUserPresenter {
 
     //userModel 정보 삭제
     fun deleteUserData(userModel: UserModel) {
-
         val params = DeleteUserListUseCase.Params(userModelMapper!!.transform(userModel))
-
         this.deleteUserListUseCase.subscribe(params)
     }
 
