@@ -32,6 +32,8 @@ android {
     }
 }
 
+apply plugin: 'kotlin-kapt'
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -66,7 +68,33 @@ dependencies {
 
     //room
     implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    kaptTest "android.arch.persistence.room:testing:1.1.1"
     annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
     implementation "android.arch.persistence.room:rxjava2:1.1.1"
 
+
+
+    //koin
+    implementation "org.koin:koin-androidx-viewmodel:2.0.1"
+    implementation "org.koin:koin-android:2.0.1"
+    implementation "org.koin:koin-androidx-scope:2.0.1"
+    testImplementation "org.koin:koin-test:2.0.1"
+    androidTestImplementation "org.koin:koin-test:2.0.1"
+
+
+/*    implementation "org.koin:koin-androidx-scope:2.0.1"
+// Koin AndroidX ViewModel features
+    implementation "org.koin:koin-androidx-viewmodel:2.0.1"
+// Koin AndroidX Experimental features
+    implementation "org.koin:koin-androidx-ext:2.0.1"
+    implementation "org.koin:koin-android:2.0.1"*/
+
+
+    //rxbinding
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0"
+/*
+    implementation "org.koin:koin-android:2.0.1"
+    implementation "org.koin:koin-test:2.0.1"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:2.0.0"*/
 }
