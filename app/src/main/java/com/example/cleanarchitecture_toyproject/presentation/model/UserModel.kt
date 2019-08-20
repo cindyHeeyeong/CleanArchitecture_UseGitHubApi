@@ -6,4 +6,4 @@ data class UserModel
 //Checkbox checked
 
 
-    (val id: Int, var login: String?, var avatar_url: String?, var checked: Boolean?)
+    (val id: Int, var login: String, var avatar_url: String, var checked: Boolean)

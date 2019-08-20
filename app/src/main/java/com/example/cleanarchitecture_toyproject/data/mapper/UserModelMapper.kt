@@ -8,14 +8,14 @@ import java.util.ArrayList
 
 class UserModelMapper {
 
-    private fun transform(userModel: UserEntity): User {
-        Log.d("debug700", userModel.getchecked().toString())
-        return User(userModel.id, userModel.login, userModel.avatar_url, userModel.getchecked())
+    private fun transform(target : UserEntity): User = with(target){
+        //Log.d("debug700", userModel.getchecked().toString())
+        return User(id, login, avatar_url, checked)
     }
 
-    fun transform(userModels: List<UserEntity>): List<User> {
+    fun transform(target : List<UserEntity>): List<User> = with(target) {
         val userList = ArrayList<User>()
-        for (userModel in userModels) {
+        for (userModel in target) {
             val user = transform(userModel)
             if (user != null) {
                 userList.add(user)

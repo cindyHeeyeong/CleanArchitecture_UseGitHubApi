@@ -11,7 +11,7 @@ class UserModelMapper {
 
     private fun transform(user: User?): UserModel {
         if (user == null) {
-            throw IllegalArgumentException("cannot transform a null value")
+            throw IllegalArgumentException("cannot transform a null value") as Throwable
         }
 
         val userModel = UserModel(user.id, user.login, user.avatar_url, user.checked)
@@ -38,8 +38,8 @@ class UserModelMapper {
         return userModelCollection
     }
 
-    fun transform(userModel: UserModel): User {
+    fun transform(userModel: UserModel): User = with(userModel){
         Log.d("User Transform", userModel.avatar_url.toString())
-        return User(userModel.id, userModel.login, userModel.avatar_url, userModel.checked)
+        return User(id, login, avatar_url, checked)
     }
 }

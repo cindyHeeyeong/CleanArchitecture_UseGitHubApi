@@ -14,25 +14,29 @@ class UserEntityMapper {
 
     //login, id, avatar_url
     //repository에서 사용 data, domain 의존성 끊어줌
-    private fun transform(target: UserEntity): User {
+
+    // with : 반복되는 구문을 줄여주기 좋다.
+    fun transform(target: User): UserEntity = with(target) {
         Log.d("transform", "transform")
-        Log.d("transform2", target.getchecked().toString())
-        return User(target.id, target.login, target.avatar_url, target.getchecked())
+        //Log.d("transform2", target.getchecked().toString())
+        return UserEntity(login, id, avatar_url,checked)
     }
 
-    fun transform(userEntityCollection: List<UserEntity>): List<User> {
-        val userList = ArrayList<User>(20)
-        for (userEntity in userEntityCollection) {
-            val user = transform(userEntity)
+    fun transform(target: List<UserEntity>): List<User> = with(target){
+       /* val userList = ArrayList<User>(20)
+        for (userEntity in target) {
+            var user = transform(userEntity)
             userList.add(user)
         }
-        return userList
+        return userList*/
+        return map { User(it.id, it.login, it.avatar_url, it.checked)}
     }
 
-    fun transform(target: User): UserEntity {
-        Log.d("debug124", target.checked.toString())
-        return UserEntity(target.id, target.login, target.avatar_url, target.checked)
-    }
+/*
+     fun transform(target: User): UserEntity = with(target){
+         Log.d("debug124", target.checked.toString())
+         return UserEntity(id, login, avatar_url, checked)
+     }*/
 
 
 }

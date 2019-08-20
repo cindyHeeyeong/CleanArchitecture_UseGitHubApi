@@ -1,5 +1,6 @@
 package com.example.cleanarchitecture_toyproject.di
 
+import androidx.room.Room
 import com.example.cleanarchitecture_toyproject.data.cache.database.AppDatabase
 import com.example.cleanarchitecture_toyproject.data.constant.ApiConstants
 import com.example.cleanarchitecture_toyproject.data.executor.JobExecutor
@@ -21,7 +22,7 @@ import com.example.cleanarchitecture_toyproject.presentation.presenter.FavoriteU
 import com.example.cleanarchitecture_toyproject.presentation.presenter.UserListPresenter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -48,12 +49,14 @@ val remoteSourceModule = module {
 }
 
 val roomModule = module {
-
+    single {
+        Room.databaseBuilder(androidContext(), AppDatabase::class.java, "UserModel_database")
+            .fallbackToDestructiveMigration()
+            .build()
+    }
 }
 
 val cacheSourceModule = module {
-    //TODO appdatabase module 만들어야 함
-    single {AppDatabase.makeDataBase(androidApplication())}
     single {get<AppDatabase>().userDao()}
     single<UserEntityCache> {UserEntityCacheImpl(database = get())}
 }
