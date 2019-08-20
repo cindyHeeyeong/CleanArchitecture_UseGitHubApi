@@ -23,6 +23,7 @@ class UserListPresenter(val getUserListUseCase: GetUserListUseCase,
 
     //usecase execute
     fun getUserList(userName: String) {
+        Log.d("userName ->","value$userName")
 
         this.getUserListUseCase.execute(object : DefaultObserver<List<User>>() {
             override fun onNext(users: List<User>) {
@@ -35,7 +36,7 @@ class UserListPresenter(val getUserListUseCase: GetUserListUseCase,
             }
 
             override fun onError(exception: Throwable) {
-                Log.d("favoriteUserpresenter", "error$exception")
+                Log.d("favoriteUserpresenter", "error${exception.cause}")
             }
         }, GetUserListUseCase.Params.forUser(userName))
 

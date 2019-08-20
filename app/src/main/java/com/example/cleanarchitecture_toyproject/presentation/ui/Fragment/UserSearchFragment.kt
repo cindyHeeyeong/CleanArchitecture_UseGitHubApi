@@ -85,6 +85,7 @@ class UserSearchFragment : Fragment(), UserListView {
         return object : DisposableObserver<TextViewTextChangeEvent>() {
             override fun onNext(textViewTextChangeEvent: TextViewTextChangeEvent) {
                 Log.d("search string: ", textViewTextChangeEvent.text().toString())
+                userName=textViewTextChangeEvent.text().toString()
                 loadUserList(textViewTextChangeEvent.text().toString())
 
             }
@@ -100,6 +101,7 @@ class UserSearchFragment : Fragment(), UserListView {
     }
 
     fun loadTest() {
+        Log.d("debug788","presenter -> $userName")
         this.userListPresenter.getUserList(userName)
     }
 
