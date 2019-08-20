@@ -20,10 +20,7 @@ class UserRemoteDataSourceImpl(private val userRemote: UserRemote,
                val userModel = userEntityCache.getUserList(userEntity.id)
                Log.v("DEBUG200", "userModel :" + userEntity.id)
 
-               userModel?.let {
-                   userEntity.checked = true
-               }
-               userEntity.checked = false
+               if(userModel!=null) userEntity.checked = true else userEntity.checked = false
            }
            .toList().toObservable()
        //toList는 data를  list형태로 바꾸기 바꾸기
