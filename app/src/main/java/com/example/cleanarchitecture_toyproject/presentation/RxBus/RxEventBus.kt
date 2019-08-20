@@ -5,7 +5,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.BehaviorSubject
 
 //참고 자료 :  https://nittaku.tistory.com/216
-class RxEventBus private constructor() {
+class RxEventBus{
 
     /*
     BehaviorSubject vs PublishSubject
@@ -37,19 +37,5 @@ class RxEventBus private constructor() {
     fun sendBus(`object`: Any) {
         Log.d("RxEventBus", "sendBus")
         subject.onNext(`object`)
-    }
-
-    companion object {
-
-        private var rxEventBus: RxEventBus? = null
-
-        //singleton 생성
-        val instance: RxEventBus?
-            get() {
-                if (rxEventBus == null) {
-                    rxEventBus = RxEventBus()
-                }
-                return rxEventBus
-            }
     }
 }

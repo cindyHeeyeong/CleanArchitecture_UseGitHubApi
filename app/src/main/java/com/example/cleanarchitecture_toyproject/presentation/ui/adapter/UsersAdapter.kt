@@ -21,17 +21,16 @@ class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersA
 
     private var position : Int = 0
 
-    private val userModel1: UserModel? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.row_user, parent, false)
         return UserViewHolder(itemView)
     }
 
-    inner class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        internal var user_profile_avatar: ImageView
-        internal var username: TextView
-        internal var checkBox: CheckBox
+    class UserViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        var user_profile_avatar: ImageView
+        var username: TextView
+        var checkBox: CheckBox
 
         init {
             user_profile_avatar = view.findViewById<View>(R.id.avatar_img) as ImageView

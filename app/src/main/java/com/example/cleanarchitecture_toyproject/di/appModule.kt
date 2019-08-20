@@ -18,6 +18,7 @@ import com.example.cleanarchitecture_toyproject.domain.usecase.DeleteUserListUse
 import com.example.cleanarchitecture_toyproject.domain.usecase.GetUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SelectUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SetUserListUseCase
+import com.example.cleanarchitecture_toyproject.presentation.RxBus.RxEventBus
 import com.example.cleanarchitecture_toyproject.presentation.presenter.FavoriteUserPresenter
 import com.example.cleanarchitecture_toyproject.presentation.presenter.UserListPresenter
 import okhttp3.OkHttpClient
@@ -42,6 +43,10 @@ import java.util.concurrent.TimeUnit
 val remoteApiModule = module {
     single { createOkHttpClient() }
     single { createWebService<RestApiService>(get(), ApiConstants.url) }
+}
+
+val rxModule = module {
+    single {RxEventBus()}
 }
 
 val remoteSourceModule = module {
@@ -95,6 +100,7 @@ val usecaseModule = module {
 }
 
 val myModule = listOf(
+    rxModule,
     roomModule,
     remoteApiModule,
     cacheSourceModule,

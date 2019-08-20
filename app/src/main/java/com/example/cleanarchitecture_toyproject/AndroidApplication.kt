@@ -9,10 +9,6 @@ import org.koin.core.logger.EmptyLogger
 
 class AndroidApplication : Application() {
 
-    init {
-        INSTANCE = this
-    }
-
     override fun onCreate() {
         super.onCreate()
         startKoin {
@@ -23,9 +19,4 @@ class AndroidApplication : Application() {
         }
 
     }
-
-    companion object {
-        lateinit var INSTANCE : AndroidApplication
-    }
-
 }

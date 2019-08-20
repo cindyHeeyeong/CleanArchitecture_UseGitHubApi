@@ -14,11 +14,11 @@ class MainActivity : BaseActivity() {
     lateinit var binding: ActivityMainBinding
 
     //fragment
-    internal var fragmentManager = supportFragmentManager
-    internal var userSearchFragment = UserSearchFragment()
-    internal var userFavoriteFragment = UserFavoriteFragment()
+    var fragmentManager = supportFragmentManager
+    var userSearchFragment = UserSearchFragment()
+    var userFavoriteFragment = UserFavoriteFragment()
 
-    internal var active: Fragment = userSearchFragment
+    var active: Fragment = userSearchFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +41,6 @@ class MainActivity : BaseActivity() {
                     //(active as UserSearchFragment).favoriteDataSync()
                     (active as UserSearchFragment).loadTest()
                     true
-                    //return@binding.navView.setOnNavigationItemSelectedListener true
                 }
 
                 R.id.navigation_dashboard -> {
@@ -49,23 +48,9 @@ class MainActivity : BaseActivity() {
                     fragmentManager.beginTransaction().hide(active).show(userFavoriteFragment).commit()
                     active = userFavoriteFragment
                     true
-                    //return@binding.navView.setOnNavigationItemSelectedListener true
                 }
             }
             false
         }
-
-      // test()
     }
-
-    //inline 함수 스터디
-/*    inline fun print(body:()->Unit){
-        body()
-    }
-
-    fun test(){
-        print{ Log.v("DEBUG100","test") }
-
-    }*/
-
 }

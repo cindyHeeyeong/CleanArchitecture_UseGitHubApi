@@ -43,7 +43,11 @@ class UserSearchFragment : Fragment(), UserListView {
 
     private val usersList = ArrayList<UserModel>()
 
+    //inject
     private val userListPresenter : UserListPresenter by inject()
+    private val rxEventBus : RxEventBus by inject()
+
+
     private val disposable = CompositeDisposable()
 
     init {
@@ -106,10 +110,6 @@ class UserSearchFragment : Fragment(), UserListView {
         this.userListPresenter.getUserList(userName)
     }
 
-    fun favoriteDataSync() {
-        loadUserList(userName)
-    }
-
     //userlist 정보 끌어오기
     fun loadUserList(userName: String) {
         Log.d("loadUserList", userName)
@@ -130,10 +130,10 @@ class UserSearchFragment : Fragment(), UserListView {
 
                 usersAdapter.notifyDataSetChanged()
                 //원 코드
-                if (userModel.checked!!) {
+                if (userModel.checked) {
                     Log.d("getChecked", "true")
                     userListPresenter.insertUserList(userModel)
-                    RxEventBus.instance!!.sendBus(userModel)
+                    rxEventBus.sendBus(userModel)
                 } else {
                     Log.d("getChecked", "false")
                     userListPresenter.deleteUser(userModel)

@@ -12,7 +12,7 @@ import io.reactivex.observers.DisposableObserver
 import io.reactivex.schedulers.Schedulers
 
 
-abstract class UseCase<T, Params> internal constructor(
+abstract class UseCase<T, Params> (
     private val threadExecutor: ThreadExecutor,
     private val postExecutionThread: PostExecutionThread
 ) {
@@ -22,7 +22,7 @@ abstract class UseCase<T, Params> internal constructor(
         this.disposables = CompositeDisposable()
     }
 
-    internal abstract fun buildUseCaseObservable(params: Params?): Observable<T>
+    abstract fun buildUseCaseObservable(params: Params?): Observable<T>
 
     @SuppressLint("RestrictedApi")
     fun execute(observer: DisposableObserver<T>, params:Params?) {

@@ -31,8 +31,9 @@ class UserFavoriteFragment : Fragment(), UserListView {
 
     private val userModels = ArrayList<UserModel>()
 
+    //inject
     private val favoriteUserPresenter : FavoriteUserPresenter by inject()
-
+    private val rxEventBus : RxEventBus by inject()
 
     //onCreateView에서는
     // 한번 이상 실행될 수 있다.
@@ -48,7 +49,7 @@ class UserFavoriteFragment : Fragment(), UserListView {
 
         favoriteUserPresenter!!.setView(this)
 
-        RxEventBus.instance!!.bus.map { `object` -> `object` as UserModel }
+        rxEventBus.bus.map { `object` -> `object` as UserModel }
             .subscribe { userModel ->
                 if (userModel is UserModel) {
 
