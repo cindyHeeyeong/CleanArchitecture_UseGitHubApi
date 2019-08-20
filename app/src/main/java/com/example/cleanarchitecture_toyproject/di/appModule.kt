@@ -28,6 +28,15 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
+
+/*koin keyword
+* -applicationContext : koin 모듈 생성
+* -factory : 인스턴스 생성(inject될 때 마다 매번 생성한다.)
+* -bean , single : 싱글톤 인스턴스 생성
+* -bind : 주어진 인스턴스와 추가적인 타입을 바인딩할 때 사용
+* -get : 컴포넌트 내에 알맞은 의존성 주입
+* */
+
 //파란색 글씨 : 빌더 패턴 (get()할 때 굳이 적어주지 않아도 됨
 val remoteApiModule = module {
     single { createOkHttpClient() }
@@ -36,6 +45,10 @@ val remoteApiModule = module {
 
 val remoteSourceModule = module {
     single<UserRemote> { UserRemotImpl(restApi = get()) }
+}
+
+val roomModule = module {
+
 }
 
 val cacheSourceModule = module {
@@ -79,6 +92,7 @@ val usecaseModule = module {
 }
 
 val myModule = listOf(
+    roomModule,
     remoteApiModule,
     cacheSourceModule,
     remoteSourceModule,

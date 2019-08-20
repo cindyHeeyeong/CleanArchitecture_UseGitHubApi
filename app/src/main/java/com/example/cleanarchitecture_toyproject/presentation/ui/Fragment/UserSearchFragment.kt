@@ -75,6 +75,7 @@ class UserSearchFragment : Fragment(), UserListView {
         )
 
 
+        //버튼을 눌렀을 때
         binding.userSearchBtn.setOnClickListener { view ->
             userName = binding.userSearchEdt.text.toString()
             loadUserList(userName)
