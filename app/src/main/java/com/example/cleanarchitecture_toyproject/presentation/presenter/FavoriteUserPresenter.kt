@@ -1,13 +1,13 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.presenter
+package com.example.cleanarchitecture_toyproject.presentation.presenter
 
 import android.util.Log
 import com.example.cleanarchitecture_toyproject.domain.User
 import com.example.cleanarchitecture_toyproject.domain.usecase.DefaultObserver
 import com.example.cleanarchitecture_toyproject.domain.usecase.DeleteUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SelectUserListUseCase
-import com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
-import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView
+import com.example.cleanarchitecture_toyproject.presentation.mapper.UserModelMapper
+import com.example.cleanarchitecture_toyproject.presentation.model.UserModel
+import com.example.cleanarchitecture_toyproject.presentation.ui.UserListView
 
 class FavoriteUserPresenter(val selectUserListUsecase: SelectUserListUseCase, val deleteUserListUseCase: DeleteUserListUseCase,val userModelMapper: UserModelMapper) {
 

@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.RxBus
+package com.example.cleanarchitecture_toyproject.presentation.RxBus
 
 import android.util.Log
 import io.reactivex.Observable

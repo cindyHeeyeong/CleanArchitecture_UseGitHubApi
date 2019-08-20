@@ -3,7 +3,6 @@ package com.example.cleanarchitecture_toyproject.data.mapper
 import android.util.Log
 import com.example.cleanarchitecture_toyproject.data.entity.UserEntity
 import com.example.cleanarchitecture_toyproject.domain.User
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
 
 import java.util.ArrayList
 

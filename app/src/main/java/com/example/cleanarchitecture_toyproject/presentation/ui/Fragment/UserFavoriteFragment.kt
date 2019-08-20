@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.view.Fragment
+package com.example.cleanarchitecture_toyproject.presentation.ui.Fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.cleanarchitecture_toyproject.R
 import com.example.cleanarchitecture_toyproject.databinding.FragmentFavoriteUsersBinding
-import com.example.cleanarchitecture_toyproject.viewmodel.RxBus.RxEventBus
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
-import com.example.cleanarchitecture_toyproject.viewmodel.presenter.FavoriteUserPresenter
-import com.example.cleanarchitecture_toyproject.viewmodel.view.UserClickListener
-import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView
-import com.example.cleanarchitecture_toyproject.viewmodel.view.adapter.UsersAdapter
+import com.example.cleanarchitecture_toyproject.presentation.RxBus.RxEventBus
+import com.example.cleanarchitecture_toyproject.presentation.model.UserModel
+import com.example.cleanarchitecture_toyproject.presentation.presenter.FavoriteUserPresenter
+import com.example.cleanarchitecture_toyproject.presentation.ui.UserClickListener
+import com.example.cleanarchitecture_toyproject.presentation.ui.UserListView
+import com.example.cleanarchitecture_toyproject.presentation.ui.adapter.UsersAdapter
 import org.koin.android.ext.android.inject
 import java.util.ArrayList
 
@@ -82,6 +82,7 @@ class UserFavoriteFragment : Fragment(), UserListView {
 
                 //delete user data
                 favoriteUserPresenter.deleteUserData(userModel)
+                usersAdapter.removeItem(userModel)
             }
         })
         recyclerView.adapter = usersAdapter

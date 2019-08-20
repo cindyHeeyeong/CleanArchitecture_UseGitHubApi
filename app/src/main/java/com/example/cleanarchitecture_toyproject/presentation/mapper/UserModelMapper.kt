@@ -1,11 +1,10 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.mapper
+package com.example.cleanarchitecture_toyproject.presentation.mapper
 
 import android.util.Log
 import com.example.cleanarchitecture_toyproject.domain.User
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
+import com.example.cleanarchitecture_toyproject.presentation.model.UserModel
 
 import java.util.ArrayList
-import java.util.Collections
 
 //UserModelMapper
 class UserModelMapper {

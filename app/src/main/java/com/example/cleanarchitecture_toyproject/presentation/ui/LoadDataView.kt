@@ -1,7 +1,6 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.view
+package com.example.cleanarchitecture_toyproject.presentation.ui
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 
 interface LoadDataView<V : View> {

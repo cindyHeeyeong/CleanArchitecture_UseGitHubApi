@@ -1,6 +1,4 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.model
-
-import android.util.Log
+package com.example.cleanarchitecture_toyproject.presentation.model
 
 
 //TODO entity를 data class로 바꾸기

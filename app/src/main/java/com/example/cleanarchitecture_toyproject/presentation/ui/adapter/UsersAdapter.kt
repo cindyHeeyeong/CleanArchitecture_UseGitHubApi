@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.view.adapter
+package com.example.cleanarchitecture_toyproject.presentation.ui.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,13 +10,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.cleanarchitecture_toyproject.R
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
-import com.example.cleanarchitecture_toyproject.viewmodel.view.UserClickListener
+import com.example.cleanarchitecture_toyproject.presentation.model.UserModel
+import com.example.cleanarchitecture_toyproject.presentation.ui.UserClickListener
 import java.util.ArrayList
 
 class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
+    private var userList2 : ArrayList<UserModel> ? = null
     private var usersList: List<UserModel>? = null
     private var listener: UserClickListener? = null
+
+    private var position : Int = 0
 
     private val userModel1: UserModel? = null
 
@@ -47,6 +50,7 @@ class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersA
 
         holder.itemView.setOnClickListener { view ->
             if (listener != null) {
+                this.position = position
                 Log.d("userModel", "favorite$userModel")
                 //TODO 이 구문 고쳐야함
                 userModel.checked = !userModel.checked!!
@@ -56,6 +60,7 @@ class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersA
                 Log.d("UsersAdapter", userModel.checked.toString())
 
                 listener!!.setOnClick(userModel)
+                Log.d("position", "position Value $position")
 
             }
         }
@@ -69,9 +74,16 @@ class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersA
         return usersList!!.size
     }
 
+    fun removeItem(userModel: UserModel){
+        Log.d("removeItem2","->$position")
+        userList2?.removeAt(position)
+        notifyItemRemoved(position)
+        notifyDataSetChanged()
+    }
 
     init {
         this.usersList = userList
+        this.userList2 = userList
     }
 
     //presenter에서 받아온 데이터 setting

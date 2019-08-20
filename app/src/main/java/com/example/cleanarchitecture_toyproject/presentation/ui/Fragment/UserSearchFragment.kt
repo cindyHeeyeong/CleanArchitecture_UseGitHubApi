@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.view.Fragment
+package com.example.cleanarchitecture_toyproject.presentation.ui.Fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cleanarchitecture_toyproject.R
 import com.example.cleanarchitecture_toyproject.databinding.FragmentUserSearchBinding
-import com.example.cleanarchitecture_toyproject.viewmodel.RxBus.RxEventBus
-import com.example.cleanarchitecture_toyproject.viewmodel.model.UserModel
-import com.example.cleanarchitecture_toyproject.viewmodel.presenter.UserListPresenter
-import com.example.cleanarchitecture_toyproject.viewmodel.view.UserClickListener
-import com.example.cleanarchitecture_toyproject.viewmodel.view.UserListView
-import com.example.cleanarchitecture_toyproject.viewmodel.view.adapter.UsersAdapter
+import com.example.cleanarchitecture_toyproject.presentation.RxBus.RxEventBus
+import com.example.cleanarchitecture_toyproject.presentation.model.UserModel
+import com.example.cleanarchitecture_toyproject.presentation.presenter.UserListPresenter
+import com.example.cleanarchitecture_toyproject.presentation.ui.UserClickListener
+import com.example.cleanarchitecture_toyproject.presentation.ui.UserListView
+import com.example.cleanarchitecture_toyproject.presentation.ui.adapter.UsersAdapter
 import com.jakewharton.rxbinding2.widget.RxTextView
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -97,6 +97,10 @@ class UserSearchFragment : Fragment(), UserListView {
 
             }
         }
+    }
+
+    fun loadTest() {
+        this.userListPresenter.getUserList(userName)
     }
 
     fun favoriteDataSync() {

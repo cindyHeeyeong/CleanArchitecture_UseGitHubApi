@@ -1,14 +1,13 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.view.Activity
+package com.example.cleanarchitecture_toyproject.presentation.ui.Activity
 
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.cleanarchitecture_toyproject.R
 import com.example.cleanarchitecture_toyproject.databinding.ActivityMainBinding
-import com.example.cleanarchitecture_toyproject.viewmodel.view.Fragment.UserFavoriteFragment
-import com.example.cleanarchitecture_toyproject.viewmodel.view.Fragment.UserSearchFragment
+import com.example.cleanarchitecture_toyproject.presentation.ui.Fragment.UserFavoriteFragment
+import com.example.cleanarchitecture_toyproject.presentation.ui.Fragment.UserSearchFragment
 
 class MainActivity : BaseActivity() {
 
@@ -39,7 +38,8 @@ class MainActivity : BaseActivity() {
                     Log.d("navigation", "home")
                     fragmentManager.beginTransaction().hide(active).show(userSearchFragment).commit()
                     active = userSearchFragment
-                    (active as UserSearchFragment).favoriteDataSync()
+                    //(active as UserSearchFragment).favoriteDataSync()
+                    (active as UserSearchFragment).loadTest()
                     true
                     //return@binding.navView.setOnNavigationItemSelectedListener true
                 }

@@ -17,8 +17,8 @@ import com.example.cleanarchitecture_toyproject.domain.usecase.DeleteUserListUse
 import com.example.cleanarchitecture_toyproject.domain.usecase.GetUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SelectUserListUseCase
 import com.example.cleanarchitecture_toyproject.domain.usecase.SetUserListUseCase
-import com.example.cleanarchitecture_toyproject.viewmodel.presenter.FavoriteUserPresenter
-import com.example.cleanarchitecture_toyproject.viewmodel.presenter.UserListPresenter
+import com.example.cleanarchitecture_toyproject.presentation.presenter.FavoriteUserPresenter
+import com.example.cleanarchitecture_toyproject.presentation.presenter.UserListPresenter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
@@ -52,7 +52,7 @@ val dataSourceModule = module {
 
 val mapperModule = module {
     factory { UserEntityMapper() }
-    factory { com.example.cleanarchitecture_toyproject.viewmodel.mapper.UserModelMapper() } //두개가 각각 다른 레이어의 mapper이다
+    factory { com.example.cleanarchitecture_toyproject.presentation.mapper.UserModelMapper() } //두개가 각각 다른 레이어의 mapper이다
     factory { com.example.cleanarchitecture_toyproject.data.mapper.UserModelMapper() }
 }
 

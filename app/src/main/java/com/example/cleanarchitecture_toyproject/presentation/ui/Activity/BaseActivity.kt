@@ -1,4 +1,4 @@
-package com.example.cleanarchitecture_toyproject.viewmodel.view.Activity
+package com.example.cleanarchitecture_toyproject.presentation.ui.Activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
