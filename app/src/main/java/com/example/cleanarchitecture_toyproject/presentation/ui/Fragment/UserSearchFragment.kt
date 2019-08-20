@@ -130,13 +130,14 @@ class UserSearchFragment : Fragment(), UserListView {
 
                 usersAdapter.notifyDataSetChanged()
                 //원 코드
-                if (userModel.checked) {
-                    Log.d("getChecked", "true")
-                    userListPresenter.insertUserList(userModel)
-                    rxEventBus.sendBus(userModel)
-                } else {
-                    Log.d("getChecked", "false")
-                    userListPresenter.deleteUser(userModel)
+                when(userModel.checked) {
+                    true -> {
+                        userListPresenter.insertUserList(userModel)
+                        rxEventBus.sendBus(userModel)
+                    }
+                    false -> {
+                        userListPresenter.deleteUser(userModel)
+                    }
                 }
             }
         })

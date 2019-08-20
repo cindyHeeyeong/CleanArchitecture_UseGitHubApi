@@ -12,14 +12,16 @@ import com.bumptech.glide.Glide
 import com.example.cleanarchitecture_toyproject.R
 import com.example.cleanarchitecture_toyproject.presentation.model.UserModel
 import com.example.cleanarchitecture_toyproject.presentation.ui.UserClickListener
+import com.example.cleanarchitecture_toyproject.presentation.ui.extensions.getItem
+import com.example.cleanarchitecture_toyproject.presentation.ui.extensions.loadUrl
 import java.util.ArrayList
 
 class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersAdapter.UserViewHolder>() {
-    private var userList2 : ArrayList<UserModel> ? = null
+    private var userList2: ArrayList<UserModel>? = null
     private var usersList: List<UserModel>? = null
     private var listener: UserClickListener? = null
 
-    private var position : Int = 0
+    private var position: Int = 0
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -40,41 +42,36 @@ class UsersAdapter(userList: ArrayList<UserModel>) : RecyclerView.Adapter<UsersA
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
-        val userModel = usersList!![position]
-        //UserModel userModel = new UserModel(userModel1.getId(), userModel1.getLogin(), userModel1.getAvatar_url(), userModel1.getChecked());
-        if (userModel.checked != null) {
-            holder.checkBox.isChecked = userModel.checked!!
-        }
-        holder.username.text = userModel.login
 
-        holder.itemView.setOnClickListener { view ->
-            if (listener != null) {
-                this.position = position
-                Log.d("userModel", "favorite$userModel")
-                //TODO 이 구문 고쳐야함
-                userModel.checked = !userModel.checked!!
-                Log.d("Adapter", "check" + userModel.checked!!)
-                //userModel.setChecked(true);
-                holder.checkBox.isChecked = userModel.checked!!
-                Log.d("UsersAdapter", userModel.checked.toString())
+        usersList?.getItem(position)?.let { userModel ->
+            //glide를 사용하여 이미지 로딩
+            val context = holder.user_profile_avatar.context
+            Glide.with(context).load(userModel.avatar_url).into(holder.user_profile_avatar)
+            with(holder) {
+                checkBox.isChecked = userModel.checked
+                username.text = userModel.login
+                user_profile_avatar.loadUrl(userModel.avatar_url)
 
-                listener!!.setOnClick(userModel)
-                Log.d("position", "position Value $position")
+                itemView.setOnClickListener { view ->
+                    listener?.let {
+                        this@UsersAdapter.position = position
+                        userModel.checked = !userModel.checked
+                        checkBox.isChecked = userModel.checked
 
+                        listener?.setOnClick(userModel)
+                    }
+                }
             }
         }
-
-        //glide를 사용하여 이미지 로딩
-        val context = holder.user_profile_avatar.context
-        Glide.with(context).load(userModel.avatar_url).into(holder.user_profile_avatar)
     }
+
 
     override fun getItemCount(): Int {
         return usersList!!.size
     }
 
-    fun removeItem(userModel: UserModel){
-        Log.d("removeItem2","->$position")
+    fun removeItem(userModel: UserModel) {
+        Log.d("removeItem2", "->$position")
         userList2?.removeAt(position)
         notifyItemRemoved(position)
         notifyDataSetChanged()

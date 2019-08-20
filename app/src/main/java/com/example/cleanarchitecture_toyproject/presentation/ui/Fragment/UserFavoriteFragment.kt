@@ -90,9 +90,10 @@ class UserFavoriteFragment : Fragment(), UserListView {
     }
 
     override fun renderUserlist(userModelCollection: List<UserModel>) {
-        if (userModelCollection != null) {
-            usersAdapter!!.setUserCollection(userModelCollection)
-        }
+            userModelCollection?.let {
+                usersAdapter!!.setUserCollection(userModelCollection)
+            }
+
         usersAdapter!!.notifyDataSetChanged()
     }
 
